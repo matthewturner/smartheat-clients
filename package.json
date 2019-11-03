@@ -1,0 +1,31 @@
+{
+  "name": "smartheat-clients",
+  "version": "1.0.0",
+  "description": "Client libraries for legacy thermostats",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matthewturner/smartheat-clients.git"
+  },
+  "keywords": [
+    "smartheat",
+    "thermostat",
+    "alexa",
+    "google",
+    "smarthome"
+  ],
+  "author": "Matt Turner",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matthewturner/smartheat-clients/issues"
+  },
+  "homepage": "https://github.com/matthewturner/smartheat-clients#readme",
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
+  }
+}
