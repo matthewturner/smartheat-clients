@@ -25,6 +25,7 @@
   "homepage": "https://github.com/matthewturner/smartheat-clients#readme",
   "dependencies": {
     "cheerio": "^0.22.0",
+    "fast-xml-parser": "^3.14.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.4"
   }
