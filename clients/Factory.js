@@ -1,6 +1,7 @@
 const Mock = require('./Mock');
 const Salus = require('./Salus');
 const SalusApi = require('./SalusApi');
+const Heatmiser = require('./Heatmiser');
 
 class Factory {
     constructor(logger) {
@@ -15,6 +16,8 @@ class Factory {
                 return new Salus(this._logger, options);
             case 'salus-api':
                 return new SalusApi(this._logger, options);
+            case 'heatmiser':
+                return new Heatmiser(this._logger, options);
             default:
                 throw `Unknown thermostat type ${type}`;
         }
