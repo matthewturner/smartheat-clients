@@ -52,7 +52,7 @@ class Heatmiser {
                 target: temp
             }
         };
-        this._heatmiser.write_device(dcb);
+        await this.write_device(dcb);
     }
 
     async turnWaterOnFor(hours) {
@@ -92,14 +92,10 @@ class Heatmiser {
         });
     }
 
-    writeDevice(dcb) {
-        this._lastError = null;
-        let result = this._heatmiser.write_device(dcb);
-
-        if (this._lastError) {
-            throw this._lastError;
-        }
-        return result;
+    async writeDevice(dcb) {
+        return new Promise((resolve) => {
+            this._heatmiser.write_device(dcb, resolve);
+        });
     }
 }
 
