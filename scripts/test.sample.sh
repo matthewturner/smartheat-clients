@@ -6,9 +6,12 @@
 
 export USERNAME=
 export PASSWORD=
+export HASH_PASSWORD=true
 export TARGET_TEMPERATURE=
 export THERMOSTAT_TYPE=
 export HOST=
+export MODEL=
+export PORT=
 export PIN=
 
 node ./scripts/test.js
