@@ -3,16 +3,7 @@ const heatmiser = require('heatmiser');
 class Heatmiser {
     constructor(logger, options) {
         this._logger = logger;
-        this._heatmiser = new heatmiser.Wifi(options.host, options.pin, options.port, options.model);
-        this._heatmiser.on('success', (data) => {
-            this._logger.debug('Success:');
-            this._logger.debug(data);
-        });
-        this._heatmiser.on('error', (data) => {
-            this._logger.error('Error:');
-            this._logger.error(data);
-            this._lastError = data;
-        });
+        this._options = options;
     }
 
     async login() {
@@ -34,7 +25,6 @@ class Heatmiser {
     async device() {
         this._logger.debug('Contacting device...');
         let data = await this.readDevice();
-        this._logger.debug(data);
         let info = {
             contactable: data.dcb.device_on,
             currentTemperature: data.dcb.built_in_air_temp,
@@ -52,7 +42,7 @@ class Heatmiser {
                 target: temp
             }
         };
-        await this.write_device(dcb);
+        await this.writeDevice(dcb);
     }
 
     async turnWaterOnFor(hours) {
@@ -87,14 +77,36 @@ class Heatmiser {
     }
 
     async readDevice() {
-        return new Promise((resolve) => {
-            this._heatmiser.read_device(resolve);
+        return new Promise((resolve, reject) => {
+            const hm = new heatmiser.Wifi(this._options.host, this._options.pin, this._options.port, this._options.model);
+            hm.on('success', (data) => {
+                this._logger.debug('Success:');
+                this._logger.debug(data);
+                resolve(data);
+            });
+            hm.on('error', (data) => {
+                this._logger.error('Error:');
+                this._logger.error(data);
+                reject(data);
+            });
+            hm.read_device();
         });
     }
 
     async writeDevice(dcb) {
         return new Promise((resolve) => {
-            this._heatmiser.write_device(dcb, resolve);
+            const hm = new heatmiser.Wifi(this._options.host, this._options.pin, this._options.port, this._options.model);
+            hm.on('success', (data) => {
+                this._logger.debug('Success:');
+                this._logger.debug(data);
+                resolve(data);
+            });
+            hm.on('error', (data) => {
+                this._logger.error('Error:');
+                this._logger.error(data);
+                reject(data);
+            });
+            hm.write_device(dcb);
         });
     }
 }
