@@ -17,9 +17,10 @@ class Heatmiser {
     async online() {
         this._logger.debug('Checking device status...');
 
-        let status = await this.device().status;
-        this._logger.debug(status);
-        return status === 'on';
+        let device = await this.device();
+
+        this._logger.debug(device.status);
+        return device.status === 'on';
     }
 
     async device() {
