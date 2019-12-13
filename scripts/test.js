@@ -1,7 +1,5 @@
 const crypto = require('crypto');
 
-const Factory = require('../clients/Factory');
-
 const main = async () => {
     let password = process.env.PASSWORD;
 
@@ -16,9 +14,9 @@ const main = async () => {
             console.log('');
         }
 
-        const factory = new Factory(console);
+        const Client = require(process.env.THERMOSTAT_TYPE);
 
-        const client = factory.create(process.env.THERMOSTAT_TYPE, {
+        const client = new Client(console, {
             username: process.env.USERNAME,
             password: password,
             host: process.env.HOST,
