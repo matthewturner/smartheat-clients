@@ -46,6 +46,14 @@ class Heatmiser {
         await this.writeDevice(dcb);
     }
 
+        async setAwayMode(mode) {
+        this._logger.debug(`Setting away_mode: ${mode}...`);
+        let dcb = {
+             away_mode: mode
+        };
+        await this.writeDevice(dcb);
+    }
+
     async turnWaterOnFor(hours) {
         this._logger.debug(`Boosting water for: ${hours} hours...`);
         throw new Error('Turning water on is not supported');
