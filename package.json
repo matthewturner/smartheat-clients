@@ -1,5 +1,5 @@
 {
-  "name": "smartheat-clients",
+  "name": "@matthewturner/smartheat-clients",
   "version": "1.0.0",
   "description": "Client libraries for legacy thermostats",
   "main": "index.js",
