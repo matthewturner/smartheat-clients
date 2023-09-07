@@ -1,5 +1,5 @@
 {
-  "name": "smartheat-clients",
+  "name": "@matthewturner/smartheat-clients",
   "version": "1.0.0",
   "description": "Client libraries for legacy thermostats",
   "main": "index.js",
@@ -9,6 +9,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/matthewturner/smartheat-clients.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
   "keywords": [
     "smartheat",
