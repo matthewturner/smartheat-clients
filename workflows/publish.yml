@@ -1,0 +1,42 @@
+name: Publish
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: echo -e '//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}'$'\n'"$(cat .npmrc)" > .npmrc
+      - run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_READ }}
+      - run: npm test
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_READ }}
+
+  publish-gpr:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          registry-url: https://npm.pkg.github.com/
+      - run: echo -e '//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}'$'\n'"$(cat .npmrc)" > .npmrc
+      - run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_READ }}
+      - run: npm version --git-tag-version false ${{github.event.release.tag_name}}
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
