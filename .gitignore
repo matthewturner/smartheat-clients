@@ -5,6 +5,7 @@ node_modules/
 package.zip
 package-previous.zip
 
+test.ps1
 test.sh
 test.salus.sh
 test.heatmiser.sh

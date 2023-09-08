@@ -14,7 +14,7 @@ const main = async () => {
             console.log('');
         }
 
-        const Client = require(process.env.THERMOSTAT_TYPE);
+        const Client = require('../clients/' + process.env.THERMOSTAT_TYPE);
 
         const client = new Client(console, {
             username: process.env.USERNAME,

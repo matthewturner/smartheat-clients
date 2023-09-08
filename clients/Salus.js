@@ -1,7 +1,7 @@
 const cheerio = require('cheerio');
 
 // Enable cookies
-const request = require('request-promise');
+const request = require('@cypress/request-promise');
 
 const host = 'https://salus-it500.com';
 
